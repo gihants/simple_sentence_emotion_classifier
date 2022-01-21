@@ -34,7 +34,10 @@ def predict_label_new_sentence(sentence: str, simple_word_model: List[Dict[str,D
     for label in labels:
         label_weight = 0
         for word, word_weights in sentence_weights.items():
-            label_weight += (word_weights[label] / sum(list(word_weights.values())))
+            try:
+                label_weight += (word_weights[label] / sum(list(word_weights.values())))
+            except:
+                label_weight += 0
         label_scores[label] = label_weight
 
     print("Label scores: ", label_scores)
