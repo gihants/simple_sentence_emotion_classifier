@@ -26,7 +26,7 @@ def predict_label_new_sentence(sentence: str, simple_word_model: List[Dict[str,D
     
     sentence_weights = __generate_sentence_weights(sentence, simple_word_model)
     
-    print("Weights distribution for each word:" , sentence_weights)
+    print("Weights distribution for each word:" , sentence_weights, "\n")
     
     label_scores = dict()
     label_confidences = dict()
@@ -40,17 +40,17 @@ def predict_label_new_sentence(sentence: str, simple_word_model: List[Dict[str,D
                 label_weight += 0
         label_scores[label] = label_weight
 
-    print("Label scores: ", label_scores)
+    print("Label scores: ", label_scores, "\n")
     
     for label in labels:
         label_confidences[label] = round(label_scores[label] * 100 / sum(list(label_scores.values())), 2)
         
-    print("Label confidences (%): ", label_confidences)
+    print("Label confidences (%): ", label_confidences, "\n")
 
     predicted_label =  max(label_confidences.items(), key=operator.itemgetter(1))[0]
     
     prediction_confidence = label_confidences[predicted_label]
     
-    print("For the [sentence: ", sentence, "] the predicted label = [", predicted_label, "] with a prediction confidence = [" , prediction_confidence, "%]")
+    print("For the [sentence: ", sentence, "] the predicted label = [", predicted_label, "] with a prediction confidence = [" , prediction_confidence, "%] \n")
     
     return predicted_label, prediction_confidence
