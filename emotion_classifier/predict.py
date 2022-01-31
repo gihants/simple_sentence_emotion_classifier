@@ -22,6 +22,17 @@ def __generate_sentence_weights(sentence: str, simple_word_model: List[Dict[str,
 
 
 def predict_label_new_sentence(sentence: str, simple_word_model: List[Dict[str,Dict[str, int]]]) -> Tuple[str, int]:
+    """Predicts the emotion label for a new sentence
+
+    Parameters:
+    sentence (str): Input sentence
+    simple_word_model (List[Dict[str,Dict[str, int]]]): The trained model
+
+    Returns:
+    Tuple[str, int]: The predicted class label, The prediction confidence
+
+    """
+
     labels = [list(label_weights.keys())[0] for label_weights in simple_word_model]
     
     sentence_weights = __generate_sentence_weights(sentence, simple_word_model)
@@ -38,7 +49,7 @@ def predict_label_new_sentence(sentence: str, simple_word_model: List[Dict[str,D
                 label_weight += (word_weights[label] / sum(list(word_weights.values())))
             except:
                 label_weight += 0
-        label_scores[label] = label_weight
+        label_scores[label] = round(label_weight, 2)
 
     print("Label scores: ", label_scores, "\n")
     
