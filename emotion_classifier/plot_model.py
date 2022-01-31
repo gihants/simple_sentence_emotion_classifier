@@ -3,6 +3,12 @@ import matplotlib.pyplot as plt
 from typing import List, Dict
 
 def generate_label_wordclouds(simple_word_model: List[Dict[str,Dict[str, int]]]) -> None:
+    """Plots the wordclouds for each class of the trained model
+
+    Parameters:
+    simple_word_model (List[Dict[str,Dict[str, int]]]): The trained model
+
+    """
     fig = plt.figure(figsize=(15,8))
     for index, label_dict in enumerate(simple_word_model):
         label = list(label_dict.keys())[0]

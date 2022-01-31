@@ -22,6 +22,15 @@ def __word_count(sentence: str) -> List[Dict[str, int]]:
     return counts
 
 def build_simple_words_model(train_data_file: str) -> List[Dict[str,Dict[str, int]]]:
+    """Builds a simple statistical sentence classification model
+
+    Parameters:
+    train_data_file (int): Link to the csv file containing the training data and the labels
+
+    Returns:
+    List[Dict[str,Dict[str, int]]]: The trained model
+
+   """
     labels, sentence_sets = __load_training_data(train_data_file = train_data_file)
     word_counts = [__word_count(' '.join(sentence_set).lower()) for sentence_set in sentence_sets]
     simple_word_model = ([{label : word_count} for label, word_count in zip(labels, word_counts)])
